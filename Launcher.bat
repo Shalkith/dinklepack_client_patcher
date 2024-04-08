@@ -278,16 +278,19 @@ echo Client Patches which contains all of the custom patches for the The Dinklep
 echo.
 echo 1 - Download Part 1
 echo 2 - Download Part 2
+echo 3 - Download via Shalkith's Patcher
 echo.
-echo 3 - Delete Zip File
+echo 4 - Delete Zip File
 echo.
-echo 4 - Return To Menu
+echo 5- Return To Menu
 echo.
 set /P download_client_dropbox=Enter a number:
 if "%download_client_dropbox%"=="1" (goto download_client_part_1_dropbox)
 if "%download_client_dropbox%"=="2" (goto download_client_part_2_dropbox)
-if "%download_client_dropbox%"=="3" (goto delete_client_warning_dropbox)
-if "%download_client_dropbox%"=="4" (goto download_client)
+if "%download_client_dropbox%"=="3" (goto download_client_shalkith)
+if "%download_client_dropbox%"=="4" (goto delete_client_warning_dropbox)
+if "%download_client_dropbox%"=="5" (goto download_client)
+
 goto download_client
 
 :download_client_part_1_dropbox
@@ -342,6 +345,11 @@ echo Dinklepack Base Client Zip File deleted. Returning to "Downloading Dinklepa
 echo.
 timeout 15
 goto download_client_dropbox
+
+:download_client_shalkith
+if exist "%mainfolder%\_Tools\Music\music.on" start _Tools/cmdmp3win.exe _Tools/Music/wotlk_intro_process.mp3 >nul
+_Tools\shalkith_patcher.exe
+goto download_client
 
 :download_client_part_2_dropbox
 if exist "%mainfolder%\_Tools\Music\music.on" start _Tools/cmdmp3win.exe _Tools/Music/wotlk_intro_process.mp3 >nul
