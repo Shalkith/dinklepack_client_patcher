@@ -1,22 +1,29 @@
 import os
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
-#create folder _Client\Data if it doesnt exist
-if not os.path.exists('_Client\Data'):
-    os.makedirs('_Client\Data')
+import hashlib
+#import wget
+import json
+import requests
 
 # for each patch check if it exists, if not download it
 # if it exists, check if the checksum is correct
 # if the checksum is correct, print 'checksum correct'
 # if the checksum is incorrect, download the patch
+# this could in theroy replace download_client_part_2_dropbox in the current Launcher.bat file
+#os.chdir(os.path.dirname(os.path.abspath(__file__)))
+#create folder _Client\Data if it doesnt exist
+if not os.path.exists('_Client\Data'):
+    os.makedirs('_Client\Data')
 
-import hashlib
-import wget
-import json
-import requests
+def get_latest_patch_list():
+    #get the latest patch list from the server
+    url = 'https://raw.githubusercontent.com/Shalkith/dinklepack_client_patcher/main/patch_list.json'
+    r = requests.get(url)
+    with open('patch_list.json', 'wb') as f:
+        f.write(r.content)
 
 def clear():
     os.system('cls' if os.name=='nt' else 'clear')
+    pass
 
 def remove_temp_files():
     #rempve all files in the _Client\Data folder that end with .tmp
@@ -32,27 +39,41 @@ def get_checksum(file):
             file_hash.update(chunk)
 
     return file_hash.hexdigest()  # to get a printable str instead of bytes
-
+  
 def download_patch(patch):
-    url = patch['downloadurl_2']
+    # using the wget.exe file to download the patch like the current launcher.bat file does
+    # for example: _Tools\wget.exe -k --no-check-certificate --show-progress --content-disposition --directory-prefix=.\_Client\Data\ -c "https://www.dropbox.com/sh/7wto7lnj635qjws/AAC_-aNGG-swSXJZ-uFg1M46a/patch-8.mpq"
+    url = patch['downloadurl_1']
     filename = patch['filename']
-    downloadto = '_Client\Data\{}'.format(filename)
-    #requests.get(url)
-    wget.download(url, out=downloadto)
+    os.system('_Tools\wget.exe -k --no-check-certificate --show-progress --content-disposition --directory-prefix=.\_Client\Data\ -c "{}"'.format(url))
     
     
+
 def print_program_banner():
     remove_temp_files()
     clear()
     # Dinkledork Patch Downloader
     print('''
-┳┓•  ┓ ┓   ┓    ┓   ┏┓    ┓   ┳┓       ┓     ┓    
-┃┃┓┏┓┃┏┃┏┓┏┫┏┓┏┓┃┏  ┃┃┏┓╋┏┣┓  ┃┃┏┓┓┏┏┏┓┃┏┓┏┓┏┫┏┓┏┓
-┻┛┗┛┗┛┗┗┗ ┗┻┗┛┛ ┛┗  ┣┛┗┻┗┗┛┗  ┻┛┗┛┗┻┛┛┗┗┗┛┗┻┗┻┗ ┛ 
+      ____  _       __   __     ____             __  
+     / __ \(_)___  / /__/ /__  / __ \____  _____/ /__
+    / / / / / __ \/ //_/ / _ \/ /_/ / __ `/ ___/ //_/
+   / /_/ / / / / / ,( / /  __/ ____/ /_/ / /__/ ,(   
+  /_____/_/_/ /_/_/\_/_/\___/_/    \__,_/\___/_/\_\  v13.0
+   Dinkledork @ https://www.patreon.com/Dinklepack5
 ''')
  # print('Dinkledork Patch Downloader')
     print('By Shalkith')
-    
+
+def announcement():
+    print('''
+__________________________Downloading Dinklepack Client Patches__________________________
+
+If you get any "unspecified" files when downloading, then try again after 24 hours, as 
+the links get disabled for 24 hours by Dropbox when they reach a certain unknown limit.
+
+If it still doesn't work, after waiting, then something on your PC is preventing the 
+launcher from downloading the files and I can't do anything about that, unfortunately.''')
+
 def del_file(filename):
     try:
         os.remove(filename)
@@ -68,24 +89,43 @@ def check_patch(patch):
             print('Checksum correct - File is good to go!')
         else:
             print('Checksum incorrect - downloading new file...')
-            del_file('_Client\Data\\'+filename)            
-            download_patch(patch)
+            del_file('_Client\Data\\'+filename)
+            try:
+                download_patch(patch)
+            except Exception as e:
+                print('Error downloading file: {}'.format(e))
+                input('Press Enter to exit' )
     else:
         print('File does not exist - downloading...')
-        download_patch(patch)
+        try:
+            download_patch(patch)
+        except Exception as e:
+            print('Error downloading file: {}'.format(e))
+            input('Press Enter to exit' )
+        
 
-jsonfilename = 'patch_list.json'
-with open(jsonfilename, 'r') as f:
-    data = json.load(f)
+def main():
+    get_latest_patch_list()
+    jsonfilename = 'patch_list.json'
 
-print_program_banner()
+    with open(jsonfilename, 'r') as f:
+        data = json.load(f)
 
-for key in data:
-    #print(key)
-    print()
-    print(data[key]['filename'])
-    check_patch(data[key])
-    print('')
+    for key in data:
+        print_program_banner()
+        announcement()
+        print()
+        print(data[key]['filename'])
+        check_patch(data[key])
+        print('')
+        clear()
 
-remove_temp_files()
-print('All patches checked and downloaded if needed')
+    print('All patches checked and downloaded if needed')
+
+if __name__ == '__main__':
+
+    main()
+    input('Press Enter to exit')
+    clear()
+    os.remove('patch_list.json')
+    exit()
