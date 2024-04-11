@@ -102,6 +102,13 @@ def main():
     os.rename('dist\shalkith_patcher.exe','_Tools\shalkith_patcher.exe')
 
 
+def get_checksum(file):
+    with open(file, "rb") as f:
+        file_hash = hashlib.md5()
+        while chunk := f.read(8192):
+            file_hash.update(chunk)
+    print(file_hash.hexdigest())
+    return file_hash.hexdigest()  # to get a printable str instead of bytes
 
 if __name__ == '__main__':
-    main()
+    get_checksum('LOGO.png')
