@@ -3,6 +3,7 @@ import hashlib
 #import wget
 import json
 import requests
+import sys 
 
 # for each patch check if it exists, if not download it
 # if it exists, check if the checksum is correct
@@ -14,9 +15,17 @@ import requests
 if not os.path.exists('_Client\Data'):
     os.makedirs('_Client\Data')
 
+
 def get_latest_patch_list():
     #get the latest patch list from the server
-    url = 'https://raw.githubusercontent.com/Shalkith/dinklepack_client_patcher/main/patch_list.json'
+    #check and see if args were passed, if so use arg 1 as branch
+
+    if len(sys.argv) > 1:
+        branch = sys.argv[1]
+        url = 'https://raw.githubusercontent.com/Shalkith/dinklepack_client_patcher/{}/patch_list.json'.format(branch)
+    else:
+        url = 'https://raw.githubusercontent.com/Shalkith/dinklepack_client_patcher/main/patch_list.json'
+
     r = requests.get(url)
     with open('patch_list.json', 'wb') as f:
         f.write(r.content)
