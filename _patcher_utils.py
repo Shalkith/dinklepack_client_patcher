@@ -6,6 +6,8 @@ import sys
 import json
 import os
 
+
+
 def json_builder():
     # run once to build the json file if needed 
 
@@ -110,5 +112,53 @@ def get_checksum(file):
     print(file_hash.hexdigest())
     return file_hash.hexdigest()  # to get a printable str instead of bytes
 
+
+def new_json_builder(filepath):
+    # for each file in the folder ask if it should be added to the json file, if so, generate the checksum an add it
+
+    # get the list of files in the folder
+    files = os.listdir(filepath)
+    #print(files)
+    # load the json file
+    jsonfile = {}
+    with open('patch_list.json', 'r') as f:
+        data = json.load(f)
+    #print(data)
+    # for each file in the folder
+    for file in files:
+        # ask if the file should be added to the json file
+        #print('Add {} to the json file? y/n'.format(file))
+        #response = input()
+        if file.lower().endswith('.mpq') or file.lower().endswith('.zip'):
+            response = 'y'
+        else:
+            response = 'n'
+        if response == 'y':
+            # add the file to the json file
+            # if the file is not already in the json file, add it
+            if file not in data:
+                jsonfile[file]={"filename":file,
+                    "downloadurl_1":"",
+                    "checksum":""}
+            else:
+                jsonfile[file] = data[file]
+            # generate the checksum
+            checksum = get_checksum(filepath+'\\'+file)
+            # add the checksum to the json file
+            
+
+            jsonfile[file]['checksum']=checksum
+            #print(jsonfile)
+    # save the json file
+    temp_filename = 'patch_list_temp.json'
+    with open(temp_filename, 'w') as f:
+        f.write(json.dumps(jsonfile, indent=4)
+    )
+    #print(jsonfile)
+    #print(files)
+
+
 if __name__ == '__main__':
-    get_checksum('LOGO.png')
+    #get_checksum('LOGO.png')
+    dir = input('Enter the path to the folder to check: ')
+    new_json_builder(dir)
