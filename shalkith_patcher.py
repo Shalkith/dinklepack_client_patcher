@@ -4,6 +4,7 @@ import hashlib
 import json
 import requests
 import sys 
+import subprocess
 
 # for each patch check if it exists, if not download it
 # if it exists, check if the checksum is correct
@@ -15,6 +16,7 @@ import sys
 if not os.path.exists('_Client\Data'):
     os.makedirs('_Client\Data')
 
+download_log = []
 
 def get_latest_patch_list():
     #get the latest patch list from the server
@@ -31,7 +33,7 @@ def get_latest_patch_list():
         f.write(r.content)
 
 def clear():
-    #os.system('cls' if os.name=='nt' else 'clear')
+    os.system('cls' if os.name=='nt' else 'clear')
     pass
 
 def remove_temp_files():
@@ -39,6 +41,7 @@ def remove_temp_files():
     for file in os.listdir('_Client\Data'):
         if file.endswith('.tmp'):
             os.remove('_Client\Data\\'+file)
+            download_log.append('Deleted '+file)
 
 
 def get_checksum(file):
@@ -54,9 +57,13 @@ def download_patch(patch):
     # for example: _Tools\wget.exe -k --no-check-certificate --show-progress --content-disposition --directory-prefix=.\_Client\Data\ -c "https://www.dropbox.com/sh/7wto7lnj635qjws/AAC_-aNGG-swSXJZ-uFg1M46a/patch-8.mpq"
     url = patch['downloadurl_1']
     filename = patch['filename']
-    os.system('_Tools\wget.exe -k --no-check-certificate --show-progress --content-disposition --directory-prefix=.\_Client\Data\ -c "{}"'.format(url))
-    
-    
+    #os.system('_Tools\wget.exe -k --no-check-certificate --show-progress --content-disposition --directory-prefix=.\_Client\Data\ -c "{}"'.format(url))
+    command = '_Tools\wget.exe -k --no-check-certificate --show-progress --content-disposition --directory-prefix=.\_Client\Data\ -c "{}"'.format(url)
+    result = subprocess.check_output(command)
+    if 'ERROR 404: Not Found' in result:
+        return '404'
+    else: 
+        return '200'
 
 def print_program_banner():
     remove_temp_files()
@@ -96,25 +103,37 @@ def check_patch(patch):
         print('file exists, checking checksum...')
         if checksum == get_checksum('_Client\Data\\'+filename):
             print('Checksum correct - File is good to go!')
+            download_log.append(filename+' was already up to date')
         else:
             print('Checksum incorrect - downloading new file...')
             del_file('_Client\Data\\'+filename)
             try:
-                download_patch(patch)
+                log = download_patch(patch)
+                if log == '404':
+                    download_log.append(filename+' had an invalid checksum - we tried to download it but it wasnt found. Please try again in 24 hours')
+                else: 
+                    download_log.append(filename+' had an invalid checksum so we downloaded a new file')
+                
             except Exception as e:
                 print('Error downloading file: {}'.format(e))
-                input('Press Enter to exit' )
+                download_log.append(filename+' had an invalid checksum - we tried to download it but there was a problem. Please try again in 24 hours')
+                #input('Press Enter to exit' )
     else:
         print('File does not exist - downloading...')
         try:
-            download_patch(patch)
+            log = download_patch(patch)
+            if log == '404':
+                download_log.append(filename+' didnt exist - we tried to download it but it wasnt found. Please try again in 24 hours')
+            else: 
+                download_log.append(filename+' didnt exist so we downloaded it')
         except Exception as e:
             print('Error downloading file: {}'.format(e))
-            input('Press Enter to exit' )
+            download_log.append(filename+' didnt exist - we tried to download it but there was a problem. Please try again in 24 hours')
+            #input('Press Enter to exit' )
         
 
 def main():
-    #get_latest_patch_list()
+    get_latest_patch_list()
     jsonfilename = 'patch_list.json'
 
     with open(jsonfilename, 'r') as f:
@@ -133,11 +152,14 @@ def main():
         clear()
 
     print('All patches checked and downloaded if needed')
+    print('Here\'s what we did:')
+    for row in download_log:
+        print(row)
 
 if __name__ == '__main__':
 
     main()
     input('Press Enter to exit')
     clear()
-    #os.remove('patch_list.json')
+    os.remove('patch_list.json')
     exit()
