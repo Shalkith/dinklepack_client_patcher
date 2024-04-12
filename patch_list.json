@@ -1,4 +1,40 @@
 {
+    "common-2.MPQ": {
+        "filename": "common-2.MPQ",
+        "downloadurl_1": "",
+        "checksum": "17d340dbd0ac02569d56cd0d96b2c8b7"
+    },
+    "common.MPQ": {
+        "filename": "common.MPQ",
+        "downloadurl_1": "",
+        "checksum": "325452ce19054ee76f29acb14da85884"
+    },
+    "expansion.MPQ": {
+        "filename": "expansion.MPQ",
+        "downloadurl_1": "",
+        "checksum": "c48af167bd3253f4762dd077112252af"
+    },
+    "lichking.MPQ": {
+        "filename": "lichking.MPQ",
+        "downloadurl_1": "",
+        "checksum": "6c9f85caf621ee546dbfe8811315eb11"
+    },
+    "OptionalEyeglow-Helf-and-Belf.zip": {
+        "filename": "OptionalEyeglow-Helf-and-Belf.zip",
+        "downloadurl_1": "https://www.dropbox.com/sh/7wto7lnj635qjws/AADE5iGsI2y6E8d3olxb_qwOa/OptionalEyeglow-Helf-and-Belf.zip",
+        "downloadurl_2": "http://192.168.1.229:8000/OptionalEyeglow-Helf-and-Belf.zip",
+        "checksum": "a00e33676fe665f47ad6dc1b33646a3b"
+    },
+    "patch-2.MPQ": {
+        "filename": "patch-2.MPQ",
+        "downloadurl_1": "",
+        "checksum": "ab3a08a2993caec2db8c2c181f5f5065"
+    },
+    "patch-3.MPQ": {
+        "filename": "patch-3.MPQ",
+        "downloadurl_1": "",
+        "checksum": "35733b76fcf0f95a0d8240d1f36cc5c3"
+    },
     "Patch-6.mpq": {
         "filename": "Patch-6.mpq",
         "downloadurl_1": "https://www.dropbox.com/scl/fo/r8t7fje9j02nr2mqlki00/h/Patch-6.mpq?rlkey=09m2mcbwvejsjyn42nz9zqx63",
@@ -137,10 +173,9 @@
         "downloadurl_2": "http://192.168.1.229:8000/patch-Z.mpq",
         "checksum": "d56388e06c25ab752923c3cf3b9409a5"
     },
-    "OptionalEyeglow-Helf-and-Belf.zip": {
-        "filename": "OptionalEyeglow-Helf-and-Belf.zip",
-        "downloadurl_1": "https://www.dropbox.com/sh/7wto7lnj635qjws/AADE5iGsI2y6E8d3olxb_qwOa/OptionalEyeglow-Helf-and-Belf.zip",
-        "downloadurl_2": "http://192.168.1.229:8000/OptionalEyeglow-Helf-and-Belf.zip",
-        "checksum": "a00e33676fe665f47ad6dc1b33646a3b"
+    "patch.MPQ": {
+        "filename": "patch.MPQ",
+        "downloadurl_1": "",
+        "checksum": "6e099a82d9d2bb75c037625aecaa34aa"
     }
 }
