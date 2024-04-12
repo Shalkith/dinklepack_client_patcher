@@ -22,7 +22,7 @@ def get_latest_patch_list():
         f.write(r.content)
 
 def clear():
-    os.system('cls' if os.name=='nt' else 'clear')
+    #os.system('cls' if os.name=='nt' else 'clear')
     pass
 
 def remove_temp_files():
@@ -105,13 +105,16 @@ def check_patch(patch):
         
 
 def main():
-    get_latest_patch_list()
+    #get_latest_patch_list()
     jsonfilename = 'patch_list.json'
 
     with open(jsonfilename, 'r') as f:
         data = json.load(f)
 
     for key in data:
+        #if downloadurl_1 is empty, skip the patch
+        if data[key]['downloadurl_1'] == '':
+            continue
         print_program_banner()
         announcement()
         print()
@@ -127,5 +130,5 @@ if __name__ == '__main__':
     main()
     input('Press Enter to exit')
     clear()
-    os.remove('patch_list.json')
+    #os.remove('patch_list.json')
     exit()
