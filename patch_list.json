@@ -7,7 +7,7 @@
     "common.MPQ": {
         "filename": "common.MPQ",
         "downloadurl_1": "",
-        "checksum": "325452ce19054ee76f29acb14da85884"
+        "checksum": "4fbbd316c8c74d6a6e81f281a1e96dd9"
     },
     "expansion.MPQ": {
         "filename": "expansion.MPQ",
@@ -47,12 +47,6 @@
         "downloadurl_2": "http://192.168.1.229:8000/Patch-7.mpq",
         "checksum": "beed383e0995f5abef6ca5c85f032d9a"
     },
-    "patch-8.mpq": {
-        "filename": "patch-8.mpq",
-        "downloadurl_1": "https://www.dropbox.com/sh/7wto7lnj635qjws/AAC_-aNGG-swSXJZ-uFg1M46a/patch-8.mpq",
-        "downloadurl_2": "http://192.168.1.229:8000/patch-8.mpq",
-        "checksum": "9a4eb5ae8b8e312ddf4ef045ec407750"
-    },
     "patch-A.mpq": {
         "filename": "patch-A.mpq",
         "downloadurl_1": "https://www.dropbox.com/scl/fo/r8t7fje9j02nr2mqlki00/h/patch-A.mpq?rlkey=09m2mcbwvejsjyn42nz9zqx63",
@@ -69,7 +63,7 @@
         "filename": "Patch-D.mpq",
         "downloadurl_1": "https://www.dropbox.com/sh/7wto7lnj635qjws/AACxknWGv-uZECqyn2Pf7KXAa/Patch-D.mpq",
         "downloadurl_2": "http://192.168.1.229:8000/Patch-D.mpq",
-        "checksum": "eb0586ac88da875dbd7fcac860bd924d"
+        "checksum": "cc5ebe7a642fa082a874643224d07435"
     },
     "patch-E.mpq": {
         "filename": "patch-E.mpq",
@@ -81,7 +75,7 @@
         "filename": "patch-G.mpq",
         "downloadurl_1": "https://www.dropbox.com/scl/fo/r8t7fje9j02nr2mqlki00/h/patch-G.mpq?rlkey=09m2mcbwvejsjyn42nz9zqx63",
         "downloadurl_2": "http://192.168.1.229:8000/patch-G.mpq",
-        "checksum": "853f5b0ac72c1705024307e5d9b76a49"
+        "checksum": "a84d8c0c7a6ea1caed12e248fcd2cbd5"
     },
     "patch-H.mpq": {
         "filename": "patch-H.mpq",
@@ -111,37 +105,37 @@
         "filename": "patch-M.mpq",
         "downloadurl_1": "https://www.dropbox.com/sh/7wto7lnj635qjws/AAAYSMiyd9Y5H-VpzDWd9-b8a/patch-M.mpq",
         "downloadurl_2": "http://192.168.1.229:8000/patch-M.mpq",
-        "checksum": "baf57f46a71cf535c6983a69fa27d1f5"
+        "checksum": "9ff91fe786ec9b92e3686b51c3cd9600"
     },
     "Patch-Q.mpq": {
         "filename": "Patch-Q.mpq",
         "downloadurl_1": "https://www.dropbox.com/scl/fo/r8t7fje9j02nr2mqlki00/h/Patch-Q.mpq?rlkey=09m2mcbwvejsjyn42nz9zqx63",
         "downloadurl_2": "http://192.168.1.229:8000/Patch-Q.mpq",
-        "checksum": "4b568c1d07061cb8cd5bdce17a737f72"
+        "checksum": "1ac78b06a2758598a00a4fd530fe116e"
     },
     "Patch-R.mpq": {
         "filename": "Patch-R.mpq",
         "downloadurl_1": "https://www.dropbox.com/scl/fo/r8t7fje9j02nr2mqlki00/h/Patch-R.mpq?rlkey=09m2mcbwvejsjyn42nz9zqx63",
         "downloadurl_2": "http://192.168.1.229:8000/Patch-R.mpq",
-        "checksum": "eb4a5e36d09d6fffdafbc5e5f759a63e"
+        "checksum": "680096ed0e66c22df76cba9f2bfa9d46"
     },
     "Patch-S.mpq": {
         "filename": "Patch-S.mpq",
         "downloadurl_1": "https://www.dropbox.com/sh/7wto7lnj635qjws/AACNyDRSs2uJmZou6Z4Pt5Loa/Patch-S.mpq",
         "downloadurl_2": "http://192.168.1.229:8000/Patch-S.mpq",
-        "checksum": "01118863fc41b2b1324ab3705ac13f9a"
+        "checksum": "c0ed023974f208ed757a86c4fd71e5a7"
     },
     "Patch-T.mpq": {
         "filename": "Patch-T.mpq",
         "downloadurl_1": "https://www.dropbox.com/scl/fo/r8t7fje9j02nr2mqlki00/h/Patch-T.mpq?rlkey=09m2mcbwvejsjyn42nz9zqx63",
         "downloadurl_2": "http://192.168.1.229:8000/Patch-T.mpq",
-        "checksum": "5d32f6d1ffea820885b429c535de477f"
+        "checksum": "6653e4e74d1c268ffb9da27c61c46fb6"
     },
     "Patch-U.mpq": {
         "filename": "Patch-U.mpq",
         "downloadurl_1": "https://www.dropbox.com/sh/7wto7lnj635qjws/AABj0VDK0ZIOHCQrl6-TvBuNa/Patch-U.mpq",
         "downloadurl_2": "http://192.168.1.229:8000/Patch-U.mpq",
-        "checksum": "6bd657be2110a9bc247ebe830e6c1bb4"
+        "checksum": "11a96e47665aff8869df90d9ffc8af45"
     },
     "patch-V.mpq": {
         "filename": "patch-V.mpq",
@@ -153,19 +147,13 @@
         "filename": "Patch-W.mpq",
         "downloadurl_1": "https://www.dropbox.com/sh/7wto7lnj635qjws/AACrLaHLmpvi3L_uJjbR-ICTa/Patch-W.mpq",
         "downloadurl_2": "http://192.168.1.229:8000/Patch-W.mpq",
-        "checksum": "99c6e070d5e49832e78024ae38cffafe"
-    },
-    "patch-X.mpq": {
-        "filename": "patch-X.mpq",
-        "downloadurl_1": "https://www.dropbox.com/scl/fo/r8t7fje9j02nr2mqlki00/h/patch-X.mpq?rlkey=09m2mcbwvejsjyn42nz9zqx63",
-        "downloadurl_2": "http://192.168.1.229:8000/patch-X.mpq",
-        "checksum": "9d0d8b53256333a2a6596f30d0f41d62"
+        "checksum": "531247ac9e8ec791a049fc1c4171c845"
     },
     "Patch-Y.mpq": {
         "filename": "Patch-Y.mpq",
         "downloadurl_1": "https://www.dropbox.com/sh/7wto7lnj635qjws/AACQwlWE-KD-n3eN_ePL6NdIa/Patch-Y.mpq",
         "downloadurl_2": "http://192.168.1.229:8000/Patch-Y.mpq",
-        "checksum": "b609a965ca291373b4582fea9f082516"
+        "checksum": "61f6964ee2ca4b73f40aa4e3d6b69652"
     },
     "patch-Z.mpq": {
         "filename": "patch-Z.mpq",
