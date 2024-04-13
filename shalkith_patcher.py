@@ -52,10 +52,17 @@ def get_checksum(file):
 
     return file_hash.hexdigest()  # to get a printable str instead of bytes
   
-def download_patch(patch):
+def download_patch(patch,url=1):
     # using the wget.exe file to download the patch like the current launcher.bat file does
     # for example: _Tools\wget.exe -k --no-check-certificate --show-progress --content-disposition --directory-prefix=.\_Client\Data\ -c "https://www.dropbox.com/sh/7wto7lnj635qjws/AAC_-aNGG-swSXJZ-uFg1M46a/patch-8.mpq"
-    url = patch['downloadurl_1']
+    if url == 1:
+        url = patch['downloadurl_1']
+    elif url == 2:
+        url = patch['downloadurl_2'].replace('229:8000','190:8000')
+    else:
+        print('Invalid URL')
+        input()
+        return '404'
     filename = patch['filename']
     #os.system('_Tools\wget.exe -k --no-check-certificate --show-progress --content-disposition --directory-prefix=.\_Client\Data\ -c "{}"'.format(url))
     command = '_Tools\wget.exe -k --no-check-certificate --show-progress --content-disposition --directory-prefix=.\_Client\Data\ -c "{}"'.format(url)
@@ -108,6 +115,11 @@ def check_patch(patch):
             print('Checksum incorrect - downloading new file...')
             del_file('_Client\Data\\'+filename)
             try:
+                if len(sys.argv) > 2:
+                    log = download_patch(patch,sys.argv[2])
+                else:
+                    log = download_patch(patch)
+
                 log = download_patch(patch)
                 if log == '404':
                     download_log.append(filename+' had an invalid checksum - we tried to download it but it wasnt found. Please try again in 24 hours')
@@ -117,11 +129,14 @@ def check_patch(patch):
             except Exception as e:
                 print('Error downloading file: {}'.format(e))
                 download_log.append(filename+' had an invalid checksum - we tried to download it but there was a problem. Please try again in 24 hours')
-                #input('Press Enter to exit' )
+                input('Press Enter to exit' )
     else:
         print('File does not exist - downloading...')
         try:
-            log = download_patch(patch)
+            if len(sys.argv) > 2:
+                log = download_patch(patch,sys.argv[2])
+            else:
+                log = download_patch(patch)
             if log == '404':
                 download_log.append(filename+' didnt exist - we tried to download it but it wasnt found. Please try again in 24 hours')
             else: 
@@ -129,7 +144,7 @@ def check_patch(patch):
         except Exception as e:
             print('Error downloading file: {}'.format(e))
             download_log.append(filename+' didnt exist - we tried to download it but there was a problem. Please try again in 24 hours')
-            #input('Press Enter to exit' )
+            input('Press Enter to exit' )
         
 
 def main():
